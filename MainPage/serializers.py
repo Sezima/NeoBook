@@ -12,9 +12,4 @@ class ProductsSerializer(serializers.ModelSerializer):
         model = Products
         fields = '__all__'
 
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['images'] = ProductImageSerializer(instance.images.all(), many=True).data
-
-        return representation
 
