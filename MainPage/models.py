@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
-
+import django_filters
 # Create your models here.
 
 class Category(models.Model):
@@ -25,7 +25,11 @@ class Products(models.Model):
     def __str__(self):
         return f"{self.title} ({self.category})"
 
+# фильтрация
+class ProductsFilter(django_filters.FilterSet):
+    category = django_filters.CharFilter(field_name='category__name', lookup_expr='icontains', required=True)
 
-
-
+    class Meta:
+        model = Products
+        fields = ['category']
 # order-create

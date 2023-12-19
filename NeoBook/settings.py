@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'NeoBook',
     'Order',
+    'Cart',
     'MainPage',
     'drf_yasg',
 ]

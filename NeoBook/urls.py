@@ -22,9 +22,10 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
 
+from Cart.views import  CartView, CartItemCreateView, CartItemDeleteView
 
 from MainPage.views import CategoryListView, ProductsListView
-
+from Order.views import OrderItemView
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -44,4 +45,9 @@ urlpatterns = [
     path('', schema_view.with_ui()),
     path('api/v1/category/', CategoryListView.as_view()),
     path('api/v1/products/', ProductsListView.as_view()),
+    path('api/v1/order_create/', OrderItemView.as_view(), name='orderItem'),
+    # cart
+    path('api/v1/cart/', CartView.as_view(), name='cart-detail'),
+    path('api/v1/cart/add/<int:pk>/', CartItemCreateView.as_view(), name='add-to-cart'),
+    path('api/v1/cart/remove/<int:pk>/', CartItemDeleteView.as_view(), name='remove-from-cart'),
 ]
