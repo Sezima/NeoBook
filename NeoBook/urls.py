@@ -14,8 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.contrib import admin
 from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -44,9 +42,14 @@ urlpatterns = [
     path('', schema_view.with_ui()),
     path('api/v1/category/', CategoryListView.as_view()),
     path('api/v1/products/', ProductsListView.as_view()),
+    path('auth/', include('social_django.urls', namespace='social')),
+
     # order
     path('api/v1/order_create/', OrderItemView.as_view(), name='orderItem'),
+
     # cart
     path('api/v1/cart/', OrderView.as_view(), name='cart'),
     path('api/v1/cart_list/',  OrderItemListView.as_view()),
+    path('api/v1/account/', include('account.urls')),
+
 ]

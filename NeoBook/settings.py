@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o!@om3m#an0#i%7h6dh_gpw2f!-$i6!)obcoze&8_isw8i32%2'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'NeoBook',
+    'account',
+    'social_django',
     'Order',
     'MainPage',
     'drf_yasg',
@@ -125,7 +127,6 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 STATIC_URL = '/static/'
@@ -135,3 +136,26 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
+
+
+AUTH_USER_MODEL = 'account.MyUser'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 5
+}
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_CLASSES = (
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'your-client-id'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'your-client-secret'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/'
