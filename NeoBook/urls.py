@@ -42,8 +42,6 @@ urlpatterns = [
     path('', schema_view.with_ui()),
     path('api/v1/category/', CategoryListView.as_view()),
     path('api/v1/products/', ProductsListView.as_view()),
-    path('auth/', include('social_django.urls', namespace='social')),
-
     # order
     path('api/v1/order_create/', OrderItemView.as_view(), name='orderItem'),
 
