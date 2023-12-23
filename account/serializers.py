@@ -75,16 +75,7 @@ class UserSerializer(serializers.ModelSerializer):
         return representation
 
 
-class SearchSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MyUser
-        fields = ['email']
 
-
-class FollowSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MyUser
-        fields = ['username']
 
 
 
