@@ -22,7 +22,7 @@ from rest_framework.routers import DefaultRouter
 
 
 from MainPage.views import CategoryListView, ProductsListView
-from Order.views import OrderItemView, OrderView, OrderItemListView
+from Order.views import OrderItemView, OrderView, OrderItemListView, OrderSuccessView
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -43,10 +43,10 @@ urlpatterns = [
     path('api/v1/category/', CategoryListView.as_view()),
     path('api/v1/products/', ProductsListView.as_view()),
     # order
-    path('api/v1/order_create/', OrderItemView.as_view(), name='orderItem'),
+    path('api/v1/order_create/', OrderSuccessView.as_view()),
 
     # cart
-    path('api/v1/cart/', OrderView.as_view(), name='cart'),
+    path('api/v1/cart_create/', OrderView.as_view()),
     path('api/v1/cart_list/',  OrderItemListView.as_view()),
     path('api/v1/account/', include('account.urls')),
 

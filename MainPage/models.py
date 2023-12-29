@@ -15,7 +15,7 @@ class Category(models.Model):
 class Products(models.Model):
     title = models.CharField(max_length=225)
     description = models.TextField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='recipes')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='categories', blank=True, null=True)
     quantity = models.IntegerField(default=1, validators=[MinValueValidator(1)]);
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
